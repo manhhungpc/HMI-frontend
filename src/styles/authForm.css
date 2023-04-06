@@ -1,0 +1,14 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+.form-wrap {
+	/* @apply flex justify-center items-center; */
+	@apply bg-gray-600 p-16;
+}
+.form-input {
+	@apply border-2 bg-slate-200;
+}
+.btn {
+	@apply bg-sky-500 hover:bg-sky-700;
+}

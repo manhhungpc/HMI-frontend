@@ -1,0 +1,3 @@
+- Ability to move object
+- Show input x,y,z of object
+- Can import .gtlf file

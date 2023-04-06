@@ -1,0 +1,4 @@
+.form {
+	@apply flex justify-center items-center;
+	height: 80vh;
+}
