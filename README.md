@@ -1,6 +1,6 @@
-# Skyline
+# Story-time
 
-A blender-like on web browser <small>(experimental version)</small>
+Website for dyslexia children to learning through listening to stories
 
 ## Developing
 

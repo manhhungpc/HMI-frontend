@@ -21,8 +21,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign up</title>
-	<script src="https://accounts.google.com/gsi/client" async defer></script>
+	<title>Login</title>
 </svelte:head>
 <div class="container mx-auto">
 	<div class="form-wrap">
