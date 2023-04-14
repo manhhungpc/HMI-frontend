@@ -1,5 +1,5 @@
 {
-	"name": "syphere-client",
+	"name": "hmi_frontend",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -37,6 +37,7 @@
 		"@threlte/extras": "^4.9.3",
 		"axios": "^1.2.2",
 		"dotenv": "^16.0.3",
+		"svelte-avatar": "^1.2.0",
 		"three": "^0.148.0"
 	}
 }

@@ -3,13 +3,22 @@
 	import AuthForm from 'src/components/AuthForm.svelte';
 	let username = '',
 		email = '',
-		password = '';
+		password = '',
+		role = 'normal user',
+		avatar = '';
 	let response: any;
 
 	async function onSignUp() {
-		const res = await fetch('/auth/signup', {
+		const data = {
+			username,
+			email,
+			password,
+			role,
+			avatar,
+		};
+		const res = await fetch('/user/register', {
 			method: 'POST',
-			body: JSON.stringify({ username, email, password }),
+			body: JSON.stringify(data),
 			headers: {
 				'content-type': 'application/json',
 			},
@@ -26,6 +35,6 @@
 </svelte:head>
 <div class="container mx-auto">
 	<div class="form">
-		<AuthForm action={onSignUp} signUp={true} />
+		<AuthForm action={onSignUp} signUp={true} bind:username bind:email bind:password />
 	</div>
 </div>

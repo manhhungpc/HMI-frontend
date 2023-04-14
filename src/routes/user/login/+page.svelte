@@ -1,12 +1,13 @@
 <script lang="ts">
 	import '/src/styles/authForm.css';
 	import AuthForm from 'src/components/AuthForm.svelte';
-	let email = '',
-		password = '';
+	let email: string = '',
+		password: string = '';
 	let response: any;
 
 	async function onLoginWithPassWord() {
-		const res = await fetch('/auth/login', {
+		console.log(email, password);
+		const res = await fetch('/user/login', {
 			method: 'POST',
 			body: JSON.stringify({ email, password }),
 			headers: {
@@ -16,6 +17,7 @@
 
 		response = await res.json();
 		console.log(response);
+		localStorage.setItem('token', response.token);
 		return;
 	}
 </script>
@@ -25,6 +27,6 @@
 </svelte:head>
 <div class="container mx-auto">
 	<div class="form-wrap">
-		<AuthForm action={onLoginWithPassWord} />
+		<AuthForm action={onLoginWithPassWord} bind:email bind:password />
 	</div>
 </div>

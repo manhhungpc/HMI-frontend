@@ -10,6 +10,6 @@ export const decode = (token: string) => {
 };
 
 export const authHeader = () => {
-	const headerToken = 'Bearer' + localStorage.getItem('token');
+	const headerToken = localStorage.getItem('token');
 	return headerToken;
 };

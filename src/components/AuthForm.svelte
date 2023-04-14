@@ -1,8 +1,8 @@
 <script lang="ts">
 	import '../styles/authForm.css';
-	let username = '',
-		email = '',
-		password = '';
+	export let username = '',
+		email: string,
+		password: string;
 	let response: any;
 	export let action = () => {},
 		signUp = false;
@@ -21,7 +21,7 @@
 	<div>
 		<input class="form-input" type="text" placeholder="Password" bind:value={password} />
 	</div>
-	<button class="btn" on:click={action}>Sign up</button>
+	<button class="btn" on:click={action}>{signUp ? 'Sign up' : 'Login'}</button>
 
 	{#if response}
 		<h1>{response.data.username}</h1>
