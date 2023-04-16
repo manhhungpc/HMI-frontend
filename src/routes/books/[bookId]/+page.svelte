@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { getToken } from 'src/utils/token';
 	console.log($page.params);
 
+	const token: string = getToken();
 	const fakeData = {
 		title: 'Boooksss blanak ',
 		content:
@@ -18,6 +20,7 @@
 			body: JSON.stringify(fakeData),
 			headers: {
 				'content-type': 'form-encoded',
+				Authorization: token,
 			},
 		});
 		console.log(await res.json());
@@ -27,6 +30,7 @@
 			method: 'DELETE',
 			headers: {
 				'content-type': 'form-encoded',
+				Authorization: token,
 			},
 		});
 		console.log(await res.json());

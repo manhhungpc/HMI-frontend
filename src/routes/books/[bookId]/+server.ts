@@ -5,7 +5,6 @@ import { json } from '@sveltejs/kit';
 
 export const PUT: RequestHandler = async ({ request, params }) => {
 	const req = await request.json();
-	console.log(req, params);
 	const response = await axios.put(`${API_ENDPOINT}/v1/books/${params.bookId}`, req, {
 		headers: {
 			Authorization: TEMP_TOKEN,
@@ -15,8 +14,8 @@ export const PUT: RequestHandler = async ({ request, params }) => {
 	return json(response.data);
 };
 
-export const DELETE: RequestHandler = async ({ params }) => {
-	console.log(params);
+export const DELETE: RequestHandler = async ({ request, params }) => {
+	console.log(params, request.headers, request.headers.get('Authorization'));
 	const response = await axios.delete(`${API_ENDPOINT}/v1/books/${params.bookId}`, {
 		headers: {
 			Authorization: TEMP_TOKEN,

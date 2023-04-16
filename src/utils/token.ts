@@ -9,7 +9,13 @@ export const decode = (token: string) => {
 	);
 };
 
-export const authHeader = () => {
+export const getToken = () => {
 	const headerToken = localStorage.getItem('token');
-	return headerToken;
+	return headerToken as string;
+};
+
+export const setToken = (token: string) => {
+	localStorage.setItem('token', token);
+	const newToken = getToken();
+	return newToken;
 };
