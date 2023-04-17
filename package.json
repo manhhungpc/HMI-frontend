@@ -33,6 +33,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-vercel": "^2.4.1",
 		"@threlte/core": "^5.0.8",
 		"@threlte/extras": "^4.9.3",
 		"axios": "^1.2.2",
