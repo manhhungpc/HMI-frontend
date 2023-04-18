@@ -1,6 +1,8 @@
 <script lang="ts">
-	import '/src/styles/authForm.css';
-	import AuthForm from 'src/components/AuthForm.svelte';
+	// import '/src/styles/authForm.css';
+	// import AuthForm from 'src/components/AuthForm.svelte';
+	import '/src/styles/authFormVersion2.css';
+	import AuthForm from 'src/components/AuthFormVersion2.svelte';
 	let email: string = '',
 		password: string = '';
 	let response: any;
@@ -25,6 +27,7 @@
 <svelte:head>
 	<title>Login</title>
 </svelte:head>
+
 <div class="container mx-auto">
 	<div class="form-wrap">
 		<AuthForm action={onLoginWithPassWord} bind:email bind:password />
