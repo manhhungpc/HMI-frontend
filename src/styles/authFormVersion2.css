@@ -8,6 +8,7 @@
 :after,
 :before {
     box-sizing: border-box;
+    border-radius: 30px;
 }
 .clearfix:after,
 .clearfix:before {
@@ -24,7 +25,12 @@ a {
 }
 
 .form-wrap {
-    background-image: url(http://azcapitoltimes.com/wp-content/blogs.dir/1/files/2019/05/Education-Focus.jpg);
+    /* background-image: url(http://azcapitoltimes.com/wp-content/blogs.dir/1/files/2019/05/Education-Focus.jpg); */
+    background-image: url(https://wallpaperaccess.com/full/6191136.jpg);
+    background-image: url(https://images3.alphacoders.com/107/1074430.jpg);
+    background-image: url(https://images8.alphacoders.com/992/992757.jpg);
+    background-image: url(https://images3.alphacoders.com/112/1125358.jpg);
+    /* background-image: url(https://cutewallpaper.org/21/cartoon-farm-background/Pin-by-qazi-nizam-on-Cartoon-HD-Art-Wallpaper-Cartoon-.jpg); */
     background-size: 100% 100%;
 }
 
@@ -46,7 +52,7 @@ a {
     height: 100%;
     position: absolute;
     padding: 90px 70px 50px 70px;
-    background: rgba(40, 57, 101, 0.862);
+    background: rgba(249, 242, 167, 0.385);
 }
 .login-html .sign-in-htm,
 .login-html .sign-up-htm {
@@ -79,8 +85,8 @@ a {
 }
 .login-html .sign-in:checked + .tab,
 .login-html .sign-up:checked + .tab {
-    color: #fff;
-    border-color: #1161ee;
+    color: #e82b00;
+    border-color: #f9ae00;
 }
 .login-form {
     min-height: 345px;
@@ -95,7 +101,7 @@ a {
 .login-form .group .input,
 .login-form .group .button {
     width: 100%;
-    color: #fff;
+    color: #000000;
     display: block;
 }
 .login-form .group .input,
@@ -103,18 +109,18 @@ a {
     border: none;
     padding: 15px 20px;
     border-radius: 25px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 111, 0, 0.303);
 }
 .login-form .group input[data-type="password"] {
     text-security: circle;
     -webkit-text-security: circle;
 }
 .login-form .group .label {
-    color: #aaa;
+    color: #5b0000;
     font-size: 12px;
 }
 .login-form .group .button {
-    background: #1161ee;
+    background: #cd6d0d;
 }
 .login-form .group label .icon {
     width: 15px;
@@ -122,14 +128,14 @@ a {
     border-radius: 2px;
     position: relative;
     display: inline-block;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(183, 0, 0, 0.1);
 }
 .login-form .group label .icon:before,
 .login-form .group label .icon:after {
     content: "";
     width: 10px;
     height: 2px;
-    background: #fff;
+    background: #ffffff;
     position: absolute;
     transition: all 0.2s ease-in-out 0s;
 }
@@ -145,10 +151,10 @@ a {
     transform: scale(0) rotate(0);
 }
 .login-form .group .check:checked + label {
-    color: #fff;
+    color: #800202;
 }
 .login-form .group .check:checked + label .icon {
-    background: #1161ee;
+    background: #ee5e11;
 }
 .login-form .group .check:checked + label .icon:before {
     transform: scale(1) rotate(45deg);
@@ -172,12 +178,12 @@ a {
 .hr {
     height: 2px;
     margin: 60px 0 50px 0;
-    background: rgba(38, 49, 89, 0.242);
+    background: rgba(58, 40, 20, 0.242);
 }
 .foot-lnk {
     text-align: center;
 }
 .checktrue, .forgot-password {
-    color: rgba(155, 165, 255, 0.929);
+    color: rgb(0, 0, 0);
 }
   
