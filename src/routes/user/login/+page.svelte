@@ -1,8 +1,6 @@
 <script lang="ts">
-	// import '/src/styles/authForm.css';
-	// import AuthForm from 'src/components/AuthForm.svelte';
-	import '/src/styles/authFormVersion2.css';
-	import AuthForm from 'src/components/AuthFormVersion2.svelte';
+	import '/src/styles/authForm.css';
+	import AuthForm from 'src/components/AuthForm.svelte';
 	let email: string = '',
 		password: string = '';
 	let response: any;
