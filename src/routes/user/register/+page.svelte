@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import '/src/styles/authForm.css';
 	import AuthForm from 'src/components/AuthForm.svelte';
 	let username = '',
@@ -32,7 +31,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign up</title>
+	<title>Register</title>
 </svelte:head>
 <div class="container mx-auto">
 	<div class="form-wrap">
