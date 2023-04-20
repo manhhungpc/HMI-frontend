@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '/src/styles/login.css';
+	import '/src/styles/authForm.css';
 	import AuthForm from 'src/components/AuthForm.svelte';
 	let username = '',
 		email = '',
@@ -31,10 +31,10 @@
 </script>
 
 <svelte:head>
-	<title>Sign up</title>
+	<title>Register</title>
 </svelte:head>
 <div class="container mx-auto">
-	<div class="form">
+	<div class="form-wrap">
 		<AuthForm action={onSignUp} signUp={true} bind:username bind:email bind:password />
 	</div>
 </div>

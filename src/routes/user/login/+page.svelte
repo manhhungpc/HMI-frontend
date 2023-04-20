@@ -25,6 +25,7 @@
 <svelte:head>
 	<title>Login</title>
 </svelte:head>
+
 <div class="container mx-auto">
 	<div class="form-wrap">
 		<AuthForm action={onLoginWithPassWord} bind:email bind:password />
