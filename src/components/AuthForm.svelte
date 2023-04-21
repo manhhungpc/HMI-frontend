@@ -3,9 +3,12 @@
 	export let username = '',
 		email: string,
 		password: string;
-	let response: any;
+	let response: any,
+		repeatPassword = '',
+		err = '';
 	export let action = () => {},
 		signUp = false;
+	$: console.log(err);
 </script>
 
 <svelte:head>
@@ -26,26 +29,36 @@
 				<div class="sign-up-htm">
 					<div class="group">
 						<label for="pass" class="label">Name</label>
-						<input id="pass" type="password" class="input" data-type="password" />
+						<input id="pass" type="text" class="input" bind:value={username} />
 					</div>
 					<div class="group">
 						<label for="pass" class="label">Email Address</label>
-						<input id="pass" type="text" class="input" />
+						<input id="pass" type="email" class="input" bind:value={email} />
 					</div>
 					<div class="group">
 						<label for="pass" class="label">Password</label>
-						<input id="pass" type="password" class="input" data-type="password" />
+						<input type="password" class="input" data-type="password" bind:value={password} />
 					</div>
 					<div class="group">
 						<label for="pass" class="label">Repeat Password</label>
-						<input id="pass" type="password" class="input" data-type="password" />
+						<input type="password" class="input" data-type="password" bind:value={repeatPassword} />
 					</div>
 					<div class="group">
-						<button type="button" class="button-submit">Register</button>
+						<button
+							type="button"
+							class="button-submit"
+							on:click={() => {
+								if (password !== repeatPassword) {
+									err = 'Mật khẩu nhập lại không khớp';
+									return;
+								}
+								action();
+							}}>Register</button
+						>
 					</div>
 					<div class="hr" />
 					<a class="foot-link" href="/user/login">
-						<p class="checktrue">Already register?</p>
+						<p class="checktrue">Already register?<br /> Login here</p>
 					</a>
 					<a class="normal-link" href="/">
 						<p>Go to homepage <i class="fa-solid fa-arrow-right-to-bracket" /></p>
@@ -67,18 +80,18 @@
 				<div class="sign-in-htm">
 					<div class="group">
 						<label for="user" class="label">Email</label>
-						<input id="user" type="text" class="input" />
+						<input id="user" type="text" class="input" bind:value={email} />
 					</div>
 					<div class="group">
 						<label for="pass" class="label">Password</label>
-						<input id="pass" type="password" class="input" data-type="password" />
+						<input id="pass" type="password" class="input" bind:value={password} />
 					</div>
 					<div class="group">
 						<input id="check" type="checkbox" class="check" checked />
 						<label for="check"><span class="icon" /> Keep me Signed in</label>
 					</div>
 					<div class="group">
-						<button type="button" class="button-submit">Login</button>
+						<button type="button" class="button-submit" on:click={action}>Login</button>
 					</div>
 					<div class="hr" />
 					<a class="foot-link" href="/user/register">

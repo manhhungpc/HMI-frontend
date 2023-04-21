@@ -8,7 +8,7 @@ body {
 :after,
 :before {
 	box-sizing: border-box;
-	border-radius: 4vh;
+	/* border-radius: 4vh; */
 }
 .clearfix:after,
 .clearfix:before {
@@ -180,15 +180,17 @@ a {
 	display: flex;
 	justify-content: center;
 }
-.checktrue,
-.forgot-password {
+.checktrue {
 	background-color: #fff;
 	padding: 15px;
 	width: 60%;
 	color: #e82b00;
 	font-size: 20px;
+	border-radius: 500px;
 }
 .normal-link {
 	text-align: center;
 	font-size: 24px;
+	position: relative;
+	top: 20px;
 }
