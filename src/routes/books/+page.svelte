@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getToken } from 'src/utils/token';
 	import type { PageServerData } from './$types';
 
 	export let data: PageServerData;
@@ -17,12 +18,23 @@
 		images,
 		intro,
 	};
+	const getBooks = async () => {
+		const res = await fetch('/books', {
+			method: 'GET',
+			headers: {
+				'content-type': 'form-encoded',
+				Authorization: getToken(),
+			},
+		});
+		console.log(await res.json());
+	};
 	const onCreateBooks = async () => {
 		const res = await fetch('/books', {
 			method: 'POST',
 			body: JSON.stringify(newBook),
 			headers: {
 				'content-type': 'form-encoded',
+				Authorization: getToken(),
 			},
 		});
 		console.log(await res.json());
