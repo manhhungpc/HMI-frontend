@@ -12,6 +12,9 @@ const config: UserConfig = {
 	ssr: {
 		noExternal: ['three', 'troika-three-text'],
 	},
+	optimizeDeps: {
+		include: ['lodash.get', 'lodash.isequal', 'lodash.clonedeep']
+	}
 };
 
 export default config;
