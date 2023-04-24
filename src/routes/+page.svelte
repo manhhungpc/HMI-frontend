@@ -12,7 +12,6 @@
 	<title>Story Online</title>
 </svelte:head>
 
-
 <Header />
 <div class="book-store">
 	<TitlePage />
