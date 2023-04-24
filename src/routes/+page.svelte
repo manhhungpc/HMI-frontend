@@ -1,6 +1,5 @@
 <script>
 	import Header from 'src/components/Header.svelte';
-	import '../styles/global.css';
 	import '/src/styles/homepage.scss';
 	import Carousel from 'svelte-carousel';
 </script>
@@ -8,7 +7,6 @@
 <svelte:head>
 	<title>Story Online</title>
 </svelte:head>
-
 
 <Header />
 <div class="book-store">
