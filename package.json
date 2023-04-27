@@ -35,6 +35,7 @@
 	"dependencies": {
 		"@sveltejs/adapter-vercel": "^2.4.1",
 		"axios": "^1.2.2",
+		"compass": "^0.1.1",
 		"dotenv": "^16.0.3",
 		"svelte-avatar": "^1.2.0",
 		"svelte-carousel": "^1.0.25",
