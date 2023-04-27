@@ -20,6 +20,7 @@
 		});
 		try {
 			const response = await res.json();
+			console.log(response);
 			return response.data;
 		} catch (err) {
 			throw new Error('Server error');

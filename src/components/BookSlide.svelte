@@ -4,7 +4,6 @@
 	import '../styles/BookSlide.scss';
 
 	export let books: any = [];
-	console.log(books);
 	function getRandomStar(min: number, max: number) {
 		min = Math.ceil(min);
 		max = Math.floor(max);
