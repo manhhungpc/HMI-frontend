@@ -6,6 +6,25 @@
 	import Taskbar from 'src/components/Taskbar.svelte';
 	import '../styles/global.css';
 	import '/src/styles/homepage.scss';
+	import { getToken } from 'src/utils/token';
+
+	let token = getToken();
+
+	async function getAllBooks() {
+		const res = await fetch('/books', {
+			method: 'GET',
+			headers: {
+				'content-type': 'application/json',
+				Authorization: token,
+			},
+		});
+		try {
+			const response = await res.json();
+			return response.data;
+		} catch (err) {
+			throw new Error('Server error');
+		}
+	}
 </script>
 
 <svelte:head>
@@ -13,11 +32,15 @@
 </svelte:head>
 
 <Header />
-<div class="book-store">
-	<TitlePage />
-	<BookSlide />
-	<div class="main-wrapper">
-		<Taskbar />
-		<BooksReview />
+{#await getAllBooks()}
+	<h1>Loading ...</h1>
+{:then books}
+	<div class="book-store">
+		<TitlePage />
+		<BookSlide books={books.slice(0, 4)} />
+		<div class="main-wrapper">
+			<Taskbar />
+			<BooksReview {books} />
+		</div>
 	</div>
-</div>
+{/await}

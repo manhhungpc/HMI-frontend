@@ -1,18 +1,47 @@
-<script>
+<script lang="ts">
 	import '../styles/TaskBar.scss';
+	import { getToken } from 'src/utils/token';
+
+	let token = getToken();
+	let blank_avatar: string =
+		'https://villagesonmacarthur.com/wp-content/uploads/2020/12/Blank-Avatar.png';
+
+	async function getAllAuthors() {
+		const res = await fetch('/authors', {
+			method: 'GET',
+			headers: {
+				'content-type': 'application/json',
+				Authorization: token,
+			},
+		});
+		try {
+			const response = await res.json();
+			console.log('AUTHOR', response);
+			return response.data;
+		} catch (err) {
+			throw new Error('Server error');
+		}
+	}
+	// getAllAuthors();
 </script>
 
 <div class="books-of">
 	<div class="week">
 		<div class="author-title">Author of the week</div>
-		<div class="author">
-			<img
-				src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80"
-				alt=""
-				class="author-img"
-			/>
-			<div class="author-name">Sebastian Jeremy</div>
-		</div>
+		{#await getAllAuthors()}
+			<h1>Loading ...</h1>
+		{:then authors}
+			{#each authors as author}
+				<div class="author">
+					<img
+						src={author.images && author.images.length > 0 ? author.images[0] : blank_avatar}
+						alt="Author-img"
+						class="author-img"
+					/>
+					<div class="author-name">{author.name ? author.name : author.alias}</div>
+				</div>
+			{/each}
+		{/await}
 		<div class="author">
 			<img
 				src="https://images.unsplash.com/photo-1586297098710-0382a496c814?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
@@ -20,38 +49,6 @@
 				class="author-img"
 			/>
 			<div class="author-name">Jonathan Doe</div>
-		</div>
-		<div class="author">
-			<img
-				src="https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-				alt=""
-				class="author-img"
-			/>
-			<div class="author-name">Angeline Summer</div>
-		</div>
-		<div class="author">
-			<img
-				src="https://pbs.twimg.com/profile_images/737221709267374081/sdwta9Oh.jpg"
-				alt=""
-				class="author-img"
-			/>
-			<div class="author-name">Noah Jones</div>
-		</div>
-		<div class="author">
-			<img
-				src="https://pbs.twimg.com/profile_images/2452384114/noplz47r59v1uxvyg8ku.png"
-				alt=""
-				class="author-img"
-			/>
-			<div class="author-name">Tommy Adam</div>
-		</div>
-		<div class="author">
-			<img
-				src="https://images.unsplash.com/photo-1546961329-78bef0414d7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-				alt=""
-				class="author-img"
-			/>
-			<div class="author-name">Ian Cassandra</div>
 		</div>
 	</div>
 	<div class="week">

@@ -22,7 +22,7 @@
 		const res = await fetch('/books', {
 			method: 'GET',
 			headers: {
-				'content-type': 'form-encoded',
+				'content-type': 'application/json',
 				Authorization: getToken(),
 			},
 		});

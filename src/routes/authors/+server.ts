@@ -3,6 +3,16 @@ import axios from 'axios';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 
+export const GET: RequestHandler = async () => {
+	const response = await axios.get(`${API_ENDPOINT}/v1/authors`, {
+		headers: {
+			Authorization: TEMP_TOKEN,
+		},
+	});
+
+	return json(response.data);
+};
+
 export const POST: RequestHandler = async ({ request }) => {
 	const req = await request.json();
 	console.log(req);
