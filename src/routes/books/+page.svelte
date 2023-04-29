@@ -5,6 +5,7 @@
 	import BooksReview from 'src/components/BooksReview.svelte';
 	import type { PageServerData } from './$types';
 	import Taskbar from 'src/components/Taskbar.svelte';
+	import '/src/styles/homepage.scss';
 
 	export let data: PageServerData;
 	const books = data;
@@ -45,14 +46,13 @@
 	};
 </script>
 
-<!-- <h1>Book</h1>
-<button type="button" on:click={onCreateBooks}>Create fake book</button> -->
-
 <Header />
-<TitlePage />
-<div class="main-wrapper">
-	<Taskbar />
-	<BooksReview />
+<div class="book-store">
+	<TitlePage />
+	<div class="main-wrapper">
+		<Taskbar />
+		<BooksReview />
+	</div>
 </div>
 
 <style lang="scss">

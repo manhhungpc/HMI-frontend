@@ -4,7 +4,7 @@
 	import BookSlide from 'src/components/BookSlide.svelte';
 	import BooksReview from 'src/components/BooksReview.svelte';
 	import Taskbar from 'src/components/Taskbar.svelte';
-	import '../styles/global.css';
+	import '../styles/global.scss';
 	import '/src/styles/homepage.scss';
 </script>
 

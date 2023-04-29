@@ -53,10 +53,4 @@
 	nav ul li a:hover {
 		text-decoration: underline;
 	}
-
-	main {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 20px;
-	}
 </style>
