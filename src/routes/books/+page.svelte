@@ -7,9 +7,6 @@
 	import Taskbar from 'src/components/Taskbar.svelte';
 	import '/src/styles/homepage.scss';
 
-	export let data: PageServerData;
-	const books = data;
-	console.log(books);
 	let title: string = '',
 		content: string = '',
 		authors: string[] = [],
@@ -23,16 +20,21 @@
 		images,
 		intro,
 	};
-	const getBooks = async () => {
+	const token = localStorage.getItem('token') || '';
+
+	async function getAllBooks() {
 		const res = await fetch('/books', {
 			method: 'GET',
 			headers: {
 				'content-type': 'application/json',
-				Authorization: getToken(),
+				Authorization: token as string,
 			},
 		});
-		console.log(await res.json());
-	};
+
+		const response = await res.json();
+		console.log(response);
+		return response.data;
+	}
 	const onCreateBooks = async () => {
 		const res = await fetch('/books', {
 			method: 'POST',
@@ -47,13 +49,17 @@
 </script>
 
 <Header />
-<div class="book-store">
-	<TitlePage />
-	<div class="main-wrapper">
-		<Taskbar />
-		<BooksReview />
+{#await getAllBooks()}
+	<h1>Loading ...</h1>
+{:then books}
+	<div class="book-store">
+		<TitlePage />
+		<div class="main-wrapper">
+			<Taskbar />
+			<BooksReview {books} />
+		</div>
 	</div>
-</div>
+{/await}
 
 <style lang="scss">
 	.main-wrapper {

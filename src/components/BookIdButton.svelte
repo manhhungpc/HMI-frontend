@@ -9,6 +9,9 @@
 	<button class="button">
 		<i class="fa-regular fa-circle-stop fa-3x" />
 	</button>
+	<button class="button" on:click={() => (window.location.href = '/')}>
+		<i class="fa-solid fa-house fa-3x" />
+	</button>
 </div>
 
 <style lang="scss">

@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Crimson+Text:400,700,900,400italic,700italic,900italic|Playfair+Display:400,700,900,400italic,700italic,900italic|Rock+Salt:400);
+/* @import url(https://fonts.googleapis.com/css?family=Crimson+Text:400,700,900,400italic,700italic,900italic|Playfair+Display:400,700,900,400italic,700italic,900italic|Rock+Salt:400); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 *,
 :before,
@@ -87,8 +88,7 @@ body {
 
 /* Chapter Title */
 .open-book .chapter-title {
-	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCA2NCA2NCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNjQgNjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCiAgICA8Zz4NCiAgICAJPHBhdGggZD0iTTAsMzJMMzIsMGwzMiwzMkwzMiw2NEwwLDMyeiBNOCwzMmwyNCwyNGwyNC0yNEwzMiw4TDgsMzJ6IE0xNiwzMmwxNi0xNmwxNiwxNkwzMiw0OEwxNiwzMnogTTI0LDMybDgsOGw4LThsLTgtOEwyNCwzMnoiIC8+DQogICAgPC9nPg0KPC9zdmc+)
-		bottom center no-repeat;
+	background: url('/weird-icon.svg') bottom center no-repeat;
 	background-size: 0.5em 0.5em;
 	font: 700 7vw/1.25 'Playfair Display', sans-serif;
 	letter-spacing: 0.125em;
@@ -136,15 +136,14 @@ body {
 	text-indent: 0;
 }
 
-.open-book .chapter-title + p:first-of-type:first-letter {
+/* .open-book .chapter-title + p:first-of-type:first-letter {
 	float: left;
 	font: 700 3em/0.65 'Playfair Display', sans-serif;
 	padding: 0.15em 0.05em 0 0;
 	text-transform: uppercase;
-}
+} */
 
-.open-book article > ul,
-.open-book article > ol {
+.open-book article > ul {
 	padding-left: 3em;
 }
 
@@ -223,12 +222,12 @@ body {
 	);
 }
 
-.open-book hr {
+/* .open-book hr {
 	background-color: #000;
 	border: 0;
 	height: 2px;
 	margin: 1em 0;
-}
+} */
 
 .open-book dl {
 	border: solid 0 #ccc;
@@ -383,8 +382,7 @@ body {
 		text-indent: 3em;
 	}
 
-	.open-book article > ul,
-	.open-book article > ol {
+	.open-book article > ul {
 		padding-left: 4em;
 	}
 }

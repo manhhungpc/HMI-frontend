@@ -23,13 +23,13 @@
 	</div>
 	<div class="book-cards">
 		{#each books as book}
-			<div class="book-card">
+			<div class="book-card" on:mouseup={() => (window.location.href = `/books/${book._id}`)}>
 				<div class="content-wrapper">
 					<img src={book.images[0]} alt="Book" class="book-card-img" />
 					<div class="card-content">
 						<div class="book-name">{book.title}</div>
 						{#each book.authors as author}
-							<div class="book-by">{author}</div>
+							<div class="book-by">{author.name ? author.name : author.alias}</div>
 						{/each}
 						<div class="rate">
 							<span class="rating book-rate">

@@ -1,4 +1,5 @@
 <script>
+	// @ts-nocheck
 	import TitlePage from './../components/TitlePage.svelte';
 	import Header from 'src/components/Header.svelte';
 	import BookSlide from 'src/components/BookSlide.svelte';
@@ -18,13 +19,10 @@
 				Authorization: token,
 			},
 		});
-		try {
-			const response = await res.json();
-			console.log(response);
-			return response.data;
-		} catch (err) {
-			throw new Error('Server error');
-		}
+
+		const response = await res.json();
+		console.log(response);
+		return response.data;
 	}
 </script>
 
