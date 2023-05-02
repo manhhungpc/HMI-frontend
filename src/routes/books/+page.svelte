@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Header from './../../components/Header.svelte';
 	import { getToken } from 'src/utils/token';
 	import TitlePage from 'src/components/TitlePage.svelte';
 	import BooksReview from 'src/components/BooksReview.svelte';
@@ -48,7 +47,6 @@
 	};
 </script>
 
-<Header />
 {#await getAllBooks()}
 	<h1>Loading ...</h1>
 {:then books}
