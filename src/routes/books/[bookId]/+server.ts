@@ -5,11 +5,16 @@ import { json } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({ request, params }) => {
 	const token = request.headers.get('Authorization');
-	const response = await axios.get(`${API_ENDPOINT}/v1/books/${params.bookId}`, {
-		headers: {
-			Authorization: token,
-		},
-	});
+	let response: any;
+	try {
+		response = await axios.get(`${API_ENDPOINT}/v1/books/${params.bookId}`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	} catch (err: any) {
+		response = err.response;
+	}
 
 	return json(response.data);
 };

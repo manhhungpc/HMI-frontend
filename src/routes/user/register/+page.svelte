@@ -54,6 +54,7 @@
 			err = response.err;
 		} else {
 			setToken(response.token);
+			window.location.href = '/';
 		}
 		console.log(response);
 		return;

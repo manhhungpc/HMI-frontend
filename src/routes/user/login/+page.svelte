@@ -39,6 +39,7 @@
 			err = response.err;
 		} else {
 			setToken(response.token);
+			window.location.href = '/';
 		}
 		return;
 	}
