@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Header from './../../../components/Header.svelte';
 	let title: string = '',
 		content: string = '',
 		authors: string[] = [],
@@ -25,7 +24,6 @@
 	};
 </script>
 
-<Header />
 <nav class="navigation">
 	<ul class="main">
 		<li class="dashboard"><a href="/">Homepage</a></li>
