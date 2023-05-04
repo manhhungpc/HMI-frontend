@@ -1,211 +1,244 @@
 <script lang="ts">
+	import 'src/styles/adminForm.css';
+	import { convertToBase64 } from 'src/utils/base64';
+	import { getToken } from 'src/utils/token';
+	//@ts-ignore
+	import MultiSelect from 'svelte-multiselect';
+
+	let selected: string[] = [],
+		err = '';
 	let title: string = '',
 		content: string = '',
 		authors: string[] = [],
 		images: string[] = [],
 		intro: string = '';
+	let allBooks: any = [],
+		selectedBook: any;
+	const token = getToken();
 
-	const newBook = {
-		title,
-		content,
-		authors,
-		images,
-		intro,
-	};
+	enum Mode {
+		add = 1,
+		edit = 2,
+		delete = 3,
+	}
+	let mode = Mode.add;
+
+	function displayBookData(id: string) {
+		const book = allBooks.find((currBook: any) => currBook._id === id);
+		title = book.title;
+		content = book.content;
+		authors = book.authors.reduce((joinAuthor: string, a: any) => {
+			return a.alias + ', ' + joinAuthor;
+		}, '');
+		images = book.images;
+		intro = book.intro ? book.intro : '';
+	}
+
+	function uploadImage(e: any) {
+		convertToBase64(e, (response: string) => {
+			images = [...images, response];
+			// console.log(images);
+		});
+	}
+
+	async function getAllBooks() {
+		const res = await fetch('/books', {
+			method: 'GET',
+			headers: {
+				'content-type': 'form-encoded',
+				Authorization: token,
+			},
+		});
+		const { data } = await res.json();
+		allBooks = data;
+		return data;
+	}
+
+	async function getAuthors() {
+		const res = await fetch('/authors', {
+			method: 'GET',
+			headers: {
+				'content-type': 'form-encoded',
+				Authorization: token,
+			},
+		});
+		const { data } = await res.json();
+		const authorOptions = data.map((author: any) => {
+			const option = (author.name ? author.name : 'Name not found') + ` (${author.alias})`;
+			return option;
+		});
+
+		return authorOptions;
+	}
+
+	$: authors = selected;
 	const onCreateBooks = async () => {
+		let format_authors: any[] = [];
+		authors.map((author) => {
+			const alias = new RegExp(/\(([^)]+)\)/).exec(author)?.[1];
+			if (alias === undefined) {
+				err = 'Format tác giả không hợp lệ';
+				return;
+			}
+			format_authors.push({
+				name: author.split('(')[0].trim(),
+				alias: new RegExp(/\(([^)]+)\)/).exec(author)?.[1],
+			});
+		});
+
+		const newBook = {
+			title,
+			content,
+			authors: format_authors,
+			images,
+			intro,
+		};
 		const res = await fetch('/books', {
 			method: 'POST',
 			body: JSON.stringify(newBook),
 			headers: {
 				'content-type': 'form-encoded',
+				Authorization: token,
 			},
 		});
-		console.log(await res.json());
+		const response = await res.json();
+		console.log(response);
+		// if (response.status === 200) {
+		// 	window.location.href = '/books';
+		// }
+	};
+	const onUpdateBook = async (id: string) => {
+		const updateData = {
+			title,
+			content,
+			images,
+			intro,
+		};
+		console.log(id);
+		const res = await fetch(`/admin/books/${id}`, {
+			method: 'PUT',
+			body: JSON.stringify(updateData),
+			headers: {
+				'content-type': 'form-encoded',
+				Authorization: token,
+			},
+		});
+		const response = await res.json();
+		console.log(response);
+		return response;
+	};
+	const onDeleteBook = async (id: string) => {
+		const res = await fetch(`/admin/books/${id}`, {
+			method: 'DELETE',
+			headers: {
+				'content-type': 'form-encoded',
+				Authorization: token,
+			},
+		});
+		const response = await res.json();
+		console.log(response);
+		return response;
 	};
 </script>
 
 <nav class="navigation">
 	<ul class="main">
-		<li class="dashboard"><a href="/">Homepage</a></li>
-		<li class="update"><a href="#"><i class="fa-solid fa-file-circle-plus" /> Add Book</a></li>
-		<li class="update"><a href="#"><i class="fa-solid fa-pen-to-square" /> Update Book</a></li>
-		<li class="delete"><a href="#"><i class="fa-solid fa-trash-can" /> Delete Book</a></li>
-		<li class="home"><a href="#">Manage Users</a></li>
+		<li class="update">
+			<button class="btn-nav" on:click={() => (mode = Mode.add)}>
+				<i class="fa-solid fa-file-circle-plus" /> Add Book
+			</button>
+		</li>
+		<li class="update">
+			<button class="btn-nav" on:click={() => (mode = Mode.edit)}>
+				<i class="fa-solid fa-pen-to-square" /> Update Book
+			</button>
+		</li>
+		<li class="delete">
+			<button class="btn-nav" on:click={() => (mode = Mode.delete)}>
+				<i class="fa-solid fa-trash-can" /> Delete Book
+			</button>
+		</li>
 	</ul>
 </nav>
 <main>
 	<section class="panel important">
 		<h2>Write a story</h2>
-		<form action="/" method="post">
+		{#if err}
+			<h2>Lỗi: {err}</h2>
+		{/if}
+		<form class="wrap-form">
 			<div class="twothirds">
-				Story title:<br />
-				<input type="text" name="title" size="40" /><br />
-				Authors:<br />
-				<input type="text" name="title" size="40" /><br /><br />
-				Review:<br />
-				<textarea name="newstext" rows="5" cols="67" /><br />
-				Content:<br />
-				<textarea name="newstext" rows="15" cols="67" /><br />
-				<input type="submit" name="submit" value="Save" />
+				{#if mode === Mode.edit || mode === Mode.delete}
+					{#await getAllBooks()}
+						<p>Loading books ...</p>
+					{:then books}
+						<div>
+							Chọn sách để {mode === Mode.edit ? 'cập nhật' : 'xóa'}
+							<select
+								class="form-select"
+								bind:value={selectedBook}
+								on:change={() => displayBookData(selectedBook)}
+							>
+								{#each books as book}
+									<option value={book._id}> {book.title} </option>
+								{/each}
+							</select>
+						</div>
+					{/await}
+				{/if}
+				<div>
+					Tên cuốn truyện:<br />
+					<input type="text" size="40" bind:value={title} /><br />
+				</div>
+				{#if mode === Mode.add}
+					Tác giả:
+					{#await getAuthors()}
+						<p>Loading authors ...</p>
+					{:then authors}
+						<MultiSelect
+							options={authors}
+							bind:selected
+							allowUserOptions="append"
+							createOptionMsg="Tạo tác giả mới theo format: Tên (bút danh*)"
+						/>
+					{/await}
+				{:else}
+					<div>
+						Tác giả:<br />
+						<input type="text" size="40" bind:value={authors} /><br />
+					</div>
+				{/if}
+				<div class="mt-8">
+					Tóm tắt:<br />
+					<textarea rows="5" cols="67" bind:value={intro} /><br />
+				</div>
+				<div>
+					Nội dung:<br />
+					<textarea rows="15" cols="67" bind:value={content} /><br />
+				</div>
+				<div>
+					Ảnh bìa:<br />
+					<input type="file" size="40" accept="image/*" on:change={uploadImage} /><br />
+					{#if images.length > 0}
+						<div class="images-upload">
+							{#each images as bas64Img}
+								<img src={bas64Img} alt="Ảnh bìa" width="200" class="image" />
+							{/each}
+						</div>
+					{/if}
+				</div>
+				{#if mode === Mode.add}
+					<button type="button" class="save-btn" on:click={onCreateBooks}>Add</button>
+				{:else if mode === Mode.edit}
+					<button type="button" class="save-btn" on:click={() => onUpdateBook(selectedBook)}
+						>Save</button
+					>
+				{:else}
+					<button type="button" class="delete-btn" on:click={() => onDeleteBook(selectedBook)}
+						>Delete</button
+					>
+				{/if}
 			</div>
 		</form>
 	</section>
 </main>
-
-<style>
-	.navigation li {
-		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-	}
-	.navigation li a {
-		color: #ddd;
-		text-decoration: none;
-		display: block;
-		padding: 0.7em;
-	}
-	.navigation li a:hover {
-		background-color: rgba(255, 255, 255, 0.05);
-	}
-
-	/* current nav item */
-	.dashboard .dashboard a,
-	.delete .delete a,
-	.update .update a,
-	.home .home a {
-		background-color: rgba(255, 255, 255, 0.1);
-	}
-
-	/* panels */
-	.panel {
-		background-color: white;
-		color: darkslategray;
-		-webkit-border-radius: 0.3rem;
-		-moz-border-radius: 0.3rem;
-		-ms-border-radius: 0.3rem;
-		border-radius: 0.3rem;
-		margin: 1%;
-	}
-	.panel > h2 {
-		margin: 1rem;
-	}
-
-	/* typography */
-	a {
-		text-decoration: none;
-		color: inherit;
-	}
-
-	h2 {
-		font-weight: 300;
-		margin: 0;
-	}
-
-	h2 {
-		color: #ff1a1a;
-	}
-
-	/* lists */
-	ul,
-	li {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-	}
-
-	/* forms */
-	form input,
-	form textarea {
-		width: 100%;
-		display: block;
-		border: solid 1px #dde;
-		padding: 0.5em;
-	}
-	form input:after,
-	form textarea:after {
-		content: '';
-		display: table;
-		clear: both;
-	}
-
-	form input[type='submit'] {
-		background: #ff1a1a;
-		border: none;
-		border-bottom: solid 4px #e60000;
-		padding: 0.7em 3em;
-		margin: 1em 0;
-		color: white;
-		text-shadow: 0 -1px 0 #e60000;
-		font-size: 1.1em;
-		font-weight: bold;
-		display: inline-block;
-		width: auto;
-		-webkit-border-radius: 0.5em;
-		-moz-border-radius: 0.5em;
-		-ms-border-radius: 0.5em;
-		border-radius: 0.5em;
-	}
-	form input[type='submit']:hover {
-		background: turquoise;
-		border: none;
-		border-bottom: solid 4px #21ccbb;
-		padding: 0.7em 3em;
-		margin: 1em 0;
-		color: white;
-		text-shadow: 0 -1px 0 #21ccbb;
-		font-size: 1.1em;
-		font-weight: bold;
-		display: inline-block;
-		width: auto;
-		-webkit-border-radius: 0.5em;
-		-moz-border-radius: 0.5em;
-		-ms-border-radius: 0.5em;
-		border-radius: 0.5em;
-	}
-
-	@media screen and (min-width: 600px) {
-		.navigation {
-			position: absolute;
-			width: 200px;
-			height: 137%;
-			background: #2a3542;
-			color: #ddd;
-		}
-
-		main {
-			margin-left: 200px;
-		}
-		main:after {
-			content: '';
-			display: table;
-			clear: both;
-		}
-
-		.panel {
-			margin: 2% 0 0 2%;
-			float: left;
-			width: 96%;
-		}
-		.panel:after {
-			content: '';
-			display: table;
-			clear: both;
-		}
-
-		.twothirds {
-			padding: 1rem;
-		}
-
-		.twothirds {
-			width: 80%;
-			float: left;
-		}
-	}
-	@media screen and (min-width: 900px) {
-		.panel {
-			width: 47%;
-			clear: none;
-		}
-		.panel.important {
-			width: 96%;
-		}
-	}
-</style>

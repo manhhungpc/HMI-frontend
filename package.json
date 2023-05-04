@@ -38,6 +38,7 @@
 		"dotenv": "^16.0.3",
 		"svelte-avatar": "^1.2.0",
 		"svelte-carousel": "^1.0.25",
+		"svelte-multiselect": "^8.6.1",
 		"svelte-toasts": "^1.1.2"
 	}
 }

@@ -19,34 +19,6 @@
 		console.log(response.data);
 		return response.data;
 	};
-	const onUpdateBook = async () => {
-		const updateData = {
-			title: '',
-			content: '',
-			authors: [],
-			images: [''],
-			intro: '',
-		};
-		const res = await fetch(`/books/${$page.params.bookId}`, {
-			method: 'PUT',
-			body: JSON.stringify(updateData),
-			headers: {
-				'content-type': 'form-encoded',
-				Authorization: token,
-			},
-		});
-		console.log(await res.json());
-	};
-	const onDeleteBook = async () => {
-		const res = await fetch(`/books/${$page.params.bookId}`, {
-			method: 'DELETE',
-			headers: {
-				'content-type': 'form-encoded',
-				Authorization: token,
-			},
-		});
-		console.log(await res.json());
-	};
 </script>
 
 <svelte:head>

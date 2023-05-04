@@ -2,7 +2,6 @@
 	import { getToken } from 'src/utils/token';
 	import TitlePage from 'src/components/TitlePage.svelte';
 	import BooksReview from 'src/components/BooksReview.svelte';
-	import type { PageServerData } from './$types';
 	import Taskbar from 'src/components/Taskbar.svelte';
 	import '/src/styles/homepage.scss';
 

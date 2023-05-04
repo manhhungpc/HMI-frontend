@@ -21,12 +21,18 @@ export const GET: RequestHandler = async ({ request }) => {
 
 export const POST: RequestHandler = async ({ request }) => {
 	const req = await request.json();
-	console.log(req);
-	const response = await axios.post(`${API_ENDPOINT}/v1/books`, req, {
-		headers: {
-			Authorization: TEMP_TOKEN,
-		},
-	});
+	let response: any;
+	try {
+		response = await axios.post(`${API_ENDPOINT}/v1/books`, req, {
+			headers: {
+				Authorization: request.headers.get('Authorization'),
+			},
+		});
+	} catch (err: any) {
+		response = err.response;
+		console.log(err);
+		// return json(response);
+	}
 
 	return json(response.data);
 };

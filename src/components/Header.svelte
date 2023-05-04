@@ -1,3 +1,20 @@
+<script lang="ts">
+	import { decode } from 'src/utils/token';
+	//@ts-ignore
+	import Avatar from 'svelte-avatar';
+
+	let token = localStorage.getItem('token') as string;
+	const user: any = token ? decode(token) : 'No user!';
+
+	function redirectLink() {
+		if (user.role === 'admin') {
+			window.location.href = '/admin/books';
+			return;
+		}
+		window.location.href = `/user/${user._id}`;
+	}
+</script>
+
 <header>
 	<div class="logo">
 		<img src="src\routes\images\logo.png" alt="Storyline Online Logo" />
@@ -7,12 +24,19 @@
 			<li><a href="/">Home</a></li>
 			<li><a href="/books">Books</a></li>
 			<li><a href="/authors">Authors</a></li>
-			<li>
-				<a href="/user/register">Register</a>
-			</li>
-			<li>
-				<a href="/user/login">Login</a>
-			</li>
+			{#if token}
+				<li>
+					<button class="btn" on:click={redirectLink}> Xin chào, {user.username}</button>
+				</li>
+				<Avatar name={user.username} size="35px" style="margin-left: 10px;" />
+			{:else}
+				<li>
+					<a href="/user/register">Register</a>
+				</li>
+				<li>
+					<a href="/user/login">Login</a>
+				</li>
+			{/if}
 		</ul>
 	</nav>
 </header>
@@ -32,6 +56,7 @@
 
 	nav ul {
 		display: flex;
+		align-items: center;
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -45,12 +70,18 @@
 		margin-left: 0;
 	}
 
-	nav ul li a {
+	.btn {
+		color: #333;
+		font-weight: 800;
+	}
+	nav ul li a,
+	.btn {
 		color: #333;
 		text-decoration: none;
 	}
 
-	nav ul li a:hover {
+	nav ul li a:hover,
+	.btn:hover {
 		text-decoration: underline;
 	}
 </style>
