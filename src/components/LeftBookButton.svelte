@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { audioStore } from 'src/utils/store';
+
 	export let streamAudio = () => {};
 	export let srcAudio: string;
 
@@ -9,9 +11,13 @@
 	let audio: HTMLAudioElement,
 		state: AudioState = AudioState.playing;
 	function loadAudio(src: string) {
-		audio = new Audio(src);
-		state = AudioState.playing;
-		audio.play();
+		audioStore.set(new Audio(src));
+		audioStore.subscribe((voice) => {
+			audio = voice;
+			// audio = new Audio(src);
+			state = AudioState.playing;
+			audio.play();
+		});
 	}
 
 	function togglePause() {
@@ -29,24 +35,22 @@
 
 <div class="list-button">
 	<div class="title">Bôi đen text để nghe audio</div>
-	<button class="button" on:click={streamAudio}>
+	<button class="button audio-start" on:click={streamAudio}>
 		<i class="fa-solid fa-volume-high fa-3x" />
 	</button>
-	<!-- {#if srcAudio}
-		<audio src={srcAudio} preload="all" controls autoplay class="audio" />
-		{/if} -->
-	<button class="button" on:click={togglePause}>
+	<button class="button audio-pause-play" on:click={togglePause}>
 		{#if state === AudioState.playing}
 			<i class="fa-solid fa-circle-pause fa-3x" />
 		{:else}
 			<i class="fa-solid fa-forward fa-3x" />
 		{/if}
 	</button>
+
 	<button class="button">
 		<i class="fa-regular fa-bookmark fa-3x" />
 	</button>
-	<button class="button" on:click={() => (window.location.href = '/')}>
-		<i class="fa-solid fa-house fa-3x" />
+	<button class="button">
+		<i class="fa-regular fa-circle-question fa-3x" />
 	</button>
 </div>
 

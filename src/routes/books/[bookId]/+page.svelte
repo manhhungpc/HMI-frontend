@@ -2,8 +2,9 @@
 	import { page } from '$app/stores';
 	import { getToken } from 'src/utils/token';
 	import '/src/styles/bookId.css';
-	import BookIdButton from 'src/components/BookIdButton.svelte';
+	import LeftBookButton from 'src/components/LeftBookButton.svelte';
 	import { onMount } from 'svelte';
+	import RightBookButton from 'src/components/RightBookButton.svelte';
 
 	const token: string = getToken();
 	let selectedText: any = '',
@@ -49,7 +50,7 @@
 
 <div id="wrapper">
 	<div class="main-wrapper">
-		<BookIdButton streamAudio={() => streamAudio(selectedText)} {srcAudio} />
+		<LeftBookButton streamAudio={() => streamAudio(selectedText)} {srcAudio} />
 
 		{#await getBookData()}
 			<h1>Loading ...</h1>
@@ -72,5 +73,6 @@
 				</section>
 			</div>
 		{/await}
+		<RightBookButton />
 	</div>
 </div>
