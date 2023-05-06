@@ -16,14 +16,12 @@
 	}
 
 	$: audioStore.subscribe((voice) => {
-		console.log(voice);
 		audio = voice;
 		initAudio(audio);
 	});
 
 	$: audio ? (audio.volume = volume) : null;
 	$: audio ? (audio.playbackRate = speed) : null;
-	$: console.log(audio.volume, audio.playbackRate);
 	function initAudio(audio: HTMLAudioElement) {
 		audio.volume = 1;
 		audio.playbackRate = 1;

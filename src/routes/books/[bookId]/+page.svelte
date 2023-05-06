@@ -32,7 +32,6 @@
 	async function streamAudio(body: string) {
 		const res = await fetch(`/tts?q=${body}`, {
 			method: 'GET',
-			referrerPolicy: 'unsafe-url',
 			headers: {
 				'content-type': 'form-encoded',
 				Authorization: token,
