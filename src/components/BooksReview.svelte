@@ -37,7 +37,7 @@
 									<i class="fa-solid fa-star" />
 								{/each}
 							</span>
-							<span class="book-voters card-vote">{books.likes} likes</span>
+							<span class="book-voters card-vote">{book.likes} likes</span>
 						</div>
 						<div class=" card-sum">
 							{book.intro ? book.intro : 'Không có intro đâu, bruh ._.'}

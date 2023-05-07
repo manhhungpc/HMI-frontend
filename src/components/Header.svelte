@@ -13,6 +13,25 @@
 		}
 		window.location.href = `/user/${user._id}`;
 	}
+
+	async function checkToken() {
+		const res = await fetch(`/user/${user._id}`, {
+			method: 'GET',
+			headers: {
+				'content-type': 'form-encoded',
+				Authorization: token,
+			},
+		});
+
+		const response = await res.json();
+		if (response.status !== 200) {
+			localStorage.removeItem('token');
+			window.location.href = '/';
+			return;
+		}
+
+		return response.data;
+	}
 </script>
 
 <header>
@@ -24,19 +43,23 @@
 			<li><a href="/">Home</a></li>
 			<li><a href="/books">Books</a></li>
 			<li><a href="/authors">Authors</a></li>
-			{#if token}
-				<li>
-					<button class="btn" on:click={redirectLink}> Xin chào, {user.username}</button>
-				</li>
-				<Avatar name={user.username} size="35px" style="margin-left: 10px;" />
-			{:else}
-				<li>
-					<a href="/user/register">Register</a>
-				</li>
-				<li>
-					<a href="/user/login">Login</a>
-				</li>
-			{/if}
+			{#await checkToken()}
+				<p>Loading ... Plz wait sir!</p>
+			{:then token}
+				{#if token}
+					<li>
+						<button class="btn" on:click={redirectLink}> Xin chào, {user.username}</button>
+					</li>
+					<Avatar name={user.username} size="35px" style="margin-left: 10px;" />
+				{:else}
+					<li>
+						<a href="/user/register">Register</a>
+					</li>
+					<li>
+						<a href="/user/login">Login</a>
+					</li>
+				{/if}
+			{/await}
 		</ul>
 	</nav>
 </header>
