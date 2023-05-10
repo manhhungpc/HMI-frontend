@@ -1,5 +1,29 @@
-<script>
+<script lang="ts">
 	import 'src/styles/WordsList.css';
+
+	const token = localStorage.getItem('token') || '';
+	let err = '',
+		randomPercent: string;
+	export let params: string;
+
+	async function getUserNote() {
+		const res = await fetch(`/user/${params}/words-note`, {
+			method: 'GET',
+			// body: JSON.stringify({ userId: params }),
+			headers: {
+				'content-type': 'application/json',
+				Authorization: token as string,
+			},
+		});
+
+		const response = await res.json();
+		if (response.status !== 200) {
+			err = response.err;
+		}
+		console.log(response.data);
+
+		return response.data;
+	}
 </script>
 
 <div class="app-content">
@@ -40,99 +64,54 @@
 			</div>
 		</div>
 		<div class="project-boxes jsGridView">
-			<div class="project-box-wrapper">
-				<div class="project-box" style="background-color: #fee4cb;">
-					<div class="project-box-header">
-						<span>December 10, 2020</span>
-						<div class="more-wrapper">
-							<button class="project-btn-more">
-								<i class="fa-solid fa-ellipsis-vertical" />
-							</button>
+			{#await getUserNote()}
+				<p>Loading ...</p>
+			{:then notes}
+				{#each notes as note}
+					<div class="project-box-wrapper">
+						<div class="project-box" style="background-color: #fee4cb;">
+							<div class="project-box-header">
+								<span>{new Date(Number(note.date)).toLocaleString('en-IE')}</span>
+								<div class="more-wrapper">
+									<button class="project-btn-more">
+										<i class="fa-solid fa-ellipsis-vertical" />
+									</button>
+								</div>
+							</div>
+							<div class="project-box-content-header">
+								<p class="box-content-header">{note.word.toUpperCase()}</p>
+								<!-- <p class="box-content-subheader">Nghĩa của từ</p> -->
+							</div>
+							<div class="box-progress-wrapper" style="margin-bottom: 5px;">
+								<span class="box-progress-header">Ghi chú:</span>
+								<span style="font-weight: normal;">
+									{note.note ? note.note : 'Không có ghi chú'}
+								</span>
+							</div>
+							<div class="box-progress-wrapper">
+								<p class="box-progress-header">So sánh</p>
+								<div class="box-progress-bar">
+									<span
+										class="box-progress"
+										style="width: {randomPercent}%; background-color: #ff942e"
+									/>
+								</div>
+								<p class="box-progress-percentage">
+									{(randomPercent = Number(Math.random() * (100 - 50) + 50).toFixed(0))}
+									%
+								</p>
+							</div>
+							<div class="project-box-footer">
+								<div class="participants">
+									<button class="add-participant" style="color: #ff942e;">
+										<i class="fa-solid fa-volume-high" />
+									</button>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="project-box-content-header">
-						<p class="box-content-header">Từ</p>
-						<p class="box-content-subheader">Nghĩa của từ</p>
-					</div>
-					<div class="box-progress-wrapper">
-						<p class="box-progress-header">So sánh</p>
-						<div class="box-progress-bar">
-							<span class="box-progress" style="width: 60%; background-color: #ff942e" />
-						</div>
-						<p class="box-progress-percentage">60%</p>
-					</div>
-					<div class="project-box-footer">
-						<div class="participants">
-							<button class="add-participant" style="color: #ff942e;">
-								<i class="fa-solid fa-volume-high" />
-							</button>
-						</div>
-						<div class="days-left" style="color: #ff942e;">2 Days Left</div>
-					</div>
-				</div>
-			</div>
-			<div class="project-box-wrapper">
-				<div class="project-box" style="background-color: #e9e7fd;">
-					<div class="project-box-header">
-						<span>December 10, 2020</span>
-						<div class="more-wrapper">
-							<button class="project-btn-more">
-								<i class="fa-solid fa-ellipsis-vertical" />
-							</button>
-						</div>
-					</div>
-					<div class="project-box-content-header">
-						<p class="box-content-header">Testing</p>
-						<p class="box-content-subheader">Prototyping</p>
-					</div>
-					<div class="box-progress-wrapper">
-						<p class="box-progress-header">Progress</p>
-						<div class="box-progress-bar">
-							<span class="box-progress" style="width: 50%; background-color: #4f3ff0" />
-						</div>
-						<p class="box-progress-percentage">50%</p>
-					</div>
-					<div class="project-box-footer">
-						<div class="participants">
-							<button class="add-participant" style="color: #4f3ff0;">
-								<i class="fa-solid fa-volume-high" />
-							</button>
-						</div>
-						<div class="days-left" style="color: #4f3ff0;">2 Days Left</div>
-					</div>
-				</div>
-			</div>
-			<div class="project-box-wrapper">
-				<div class="project-box">
-					<div class="project-box-header">
-						<span>December 10, 2020</span>
-						<div class="more-wrapper">
-							<button class="project-btn-more">
-								<i class="fa-solid fa-ellipsis-vertical" />
-							</button>
-						</div>
-					</div>
-					<div class="project-box-content-header">
-						<p class="box-content-header">Svg Animations</p>
-						<p class="box-content-subheader">Prototyping</p>
-					</div>
-					<div class="box-progress-wrapper">
-						<p class="box-progress-header">Progress</p>
-						<div class="box-progress-bar">
-							<span class="box-progress" style="width: 80%; background-color: #096c86" />
-						</div>
-						<p class="box-progress-percentage">80%</p>
-					</div>
-					<div class="project-box-footer">
-						<div class="participants">
-							<button class="add-participant" style="color: #096c86;">
-								<i class="fa-solid fa-volume-high" />
-							</button>
-						</div>
-						<div class="days-left" style="color: #096c86;">2 Days Left</div>
-					</div>
-				</div>
-			</div>
+				{/each}
+			{/await}
 		</div>
 	</div>
 </div>

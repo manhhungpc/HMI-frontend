@@ -11,10 +11,11 @@
 			window.location.href = '/admin/books';
 			return;
 		}
-		window.location.href = `/user/${user._id}`;
+		window.location.href = `/user/${user._id}/words-note`;
 	}
 
 	async function checkToken() {
+		if (!token) return false;
 		const res = await fetch(`/user/${user._id}`, {
 			method: 'GET',
 			headers: {
@@ -27,7 +28,7 @@
 		if (response.status !== 200) {
 			localStorage.removeItem('token');
 			window.location.href = '/';
-			return;
+			return false;
 		}
 
 		return response.data;
