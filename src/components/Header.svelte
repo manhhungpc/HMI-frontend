@@ -36,7 +36,7 @@
 
 <header>
 	<div class="logo">
-		<img src="src\routes\images\logo.png" alt="Storyline Online Logo" />
+		<img src="/logo.png" alt="Storyline Online Logo" />
 	</div>
 	<nav>
 		<ul>
