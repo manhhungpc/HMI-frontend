@@ -1,6 +1,6 @@
 <script>
-	import WordsSearch from "src/components/WordsSearch.svelte";
-	import WordsList from "src/components/WordsList.svelte";
+	import WordsSearch from 'src/components/WordsSearch.svelte';
+	import WordsList from 'src/components/WordsList.svelte';
 </script>
 
 <div class="app-container">
@@ -43,5 +43,3 @@
 		});
 	</script>
 </div>
-
-
