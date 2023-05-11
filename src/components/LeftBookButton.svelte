@@ -1,8 +1,14 @@
 <script lang="ts">
 	import { audioStore } from 'src/utils/store';
+	import { decode } from 'src/utils/token';
+	import { toasts, ToastContainer, FlatToast } from 'svelte-toasts';
 
 	export let streamAudio = () => {};
-	export let srcAudio: string;
+	export let srcAudio: string, selectedText: string;
+	let err = '';
+
+	const token = localStorage.getItem('token') || '';
+	let user = decode(token);
 
 	enum AudioState {
 		paused = 0,
@@ -30,11 +36,40 @@
 		audio.pause();
 	}
 
+	async function saveNotes(word: string) {
+		const res = await fetch(`/user/${user._id}/words-note`, {
+			method: 'POST',
+			body: JSON.stringify({ word }),
+			headers: {
+				'content-type': 'application/json',
+				Authorization: token as string,
+			},
+		});
+
+		const response = await res.json();
+		if (response.status !== 200) {
+			err = response.err;
+			return;
+		}
+		toasts.add({
+			title: 'Đã thêm từ vựng thành công!',
+			description: `Từ: ${word}`,
+			duration: 5000, // 0 or negative to avoid auto-remove
+			showProgress: true,
+			placement: 'top-right',
+			type: 'success',
+			theme: 'dark',
+		});
+		console.log(response.data);
+
+		return response.data;
+	}
+
 	$: loadAudio(srcAudio);
 </script>
 
 <div class="list-button">
-	<div class="title">Bôi đen text để nghe audio</div>
+	<div class="title">Bôi đen text để nghe audio, lưu từ</div>
 	<button class="button audio-start" on:click={streamAudio}>
 		<i class="fa-solid fa-volume-high fa-3x" />
 	</button>
@@ -46,9 +81,12 @@
 		{/if}
 	</button>
 
-	<button class="button">
+	<button class="button" on:click={() => saveNotes(selectedText)}>
 		<i class="fa-regular fa-bookmark fa-3x" />
 	</button>
+	<ToastContainer placement="top-right" let:data>
+		<FlatToast {data} />
+	</ToastContainer>
 	<button class="button">
 		<i class="fa-regular fa-circle-question fa-3x" />
 	</button>

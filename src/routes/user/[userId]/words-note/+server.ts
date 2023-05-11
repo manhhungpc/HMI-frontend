@@ -21,7 +21,7 @@ export const GET: RequestHandler = async ({ request, params }) => {
 
 export const POST: RequestHandler = async ({ request }) => {
 	const token = request.headers.get('Authorization');
-    const data = await request.json()
+	const data = await request.json();
 	let response: any;
 	try {
 		response = await axios.post(`${API_ENDPOINT}/v1/words`, data, {

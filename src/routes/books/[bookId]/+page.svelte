@@ -49,7 +49,7 @@
 
 <div id="wrapper">
 	<div class="main-wrapper">
-		<LeftBookButton streamAudio={() => streamAudio(selectedText)} {srcAudio} />
+		<LeftBookButton streamAudio={() => streamAudio(selectedText)} {srcAudio} {selectedText} />
 
 		{#await getBookData()}
 			<h1>Loading ...</h1>
