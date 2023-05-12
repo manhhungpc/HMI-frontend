@@ -37,13 +37,15 @@
 
 <header>
 	<div class="logo">
-		<img src="/logo.png" alt="Storyline Online Logo" />
+		<a href="/">
+			<img src="/logo.png" alt="Storyline Online Logo" />
+		</a>
 	</div>
 	<nav>
 		<ul>
 			<li><a href="/">Home</a></li>
 			<li><a href="/books">Books</a></li>
-			<li><a href="/authors">Authors</a></li>
+			<li><a href="/game">Game</a></li>
 			{#await checkToken()}
 				<p>Loading ... Plz wait sir!</p>
 			{:then token}

@@ -20,13 +20,17 @@
 		});
 
 		const response = await res.json();
+		console.log(response);
+		if (response.status !== 200) window.location.href = '/user/login';
 		return response.data;
 	}
 
 	onMount(() => {
-		document.addEventListener(`selectionchange`, () => {
-			selectedText = document.getSelection()?.toString();
-		});
+		if (token) {
+			document.addEventListener(`selectionchange`, () => {
+				selectedText = document.getSelection()?.toString();
+			});
+		}
 	});
 
 	async function streamAudio(body: string) {
@@ -49,11 +53,10 @@
 
 <div id="wrapper">
 	<div class="main-wrapper">
-		<LeftBookButton streamAudio={() => streamAudio(selectedText)} {srcAudio} {selectedText} />
-
 		{#await getBookData()}
 			<h1>Loading ...</h1>
 		{:then book}
+			<LeftBookButton streamAudio={() => streamAudio(selectedText)} {srcAudio} {selectedText} />
 			<div id="container">
 				<section class="open-book">
 					<header>
@@ -71,7 +74,7 @@
 					</footer>
 				</section>
 			</div>
+			<RightBookButton />
 		{/await}
-		<RightBookButton />
 	</div>
 </div>

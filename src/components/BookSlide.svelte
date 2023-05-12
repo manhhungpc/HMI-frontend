@@ -4,6 +4,7 @@
 	import '../styles/BookSlide.scss';
 
 	export let books: any = [];
+	console.log(books);
 	function getRandomStar(min: number, max: number) {
 		min = Math.ceil(min);
 		max = Math.floor(max);
@@ -21,7 +22,7 @@
 				<div class="book-content">
 					<div class="book-title">{book.title}</div>
 					{#each book.authors as author}
-						<div class="book-author">by {author}</div>
+						<div class="book-author">by {author.name}</div>
 					{/each}
 					<div class="rate">
 						<span class="rating">

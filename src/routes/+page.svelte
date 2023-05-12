@@ -36,7 +36,7 @@
 		<TitlePage />
 		<BookSlide books={books.slice(0, 4)} />
 		<div class="main-wrapper">
-			<Taskbar />
+			<Taskbar books={books.slice(0, 4)} />
 			<BooksReview {books} />
 		</div>
 	</div>
