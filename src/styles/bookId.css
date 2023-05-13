@@ -3,6 +3,7 @@
 
 .main-wrapper {
 	width: 100%;
+	min-height: 83vh;
 	display: flex;
 	flex-grow: 1;
 	overflow: hidden;

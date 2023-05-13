@@ -23,7 +23,10 @@
 	</div>
 	<div class="book-cards">
 		{#each books as book}
-			<div class="book-card" on:mouseup={() => (window.location.href = `/books/${book._id}`)}>
+			<div
+				class="book-card"
+				on:mouseup={() => (window.location.href = `/books/${book._id}/sentences`)}
+			>
 				<div class="content-wrapper">
 					<img src={book.images[0]} alt="Book" class="book-card-img" />
 					<div class="card-content">
