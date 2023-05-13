@@ -45,7 +45,7 @@
 		<ul>
 			<li><a href="/">Home</a></li>
 			<li><a href="/books">Books</a></li>
-			<li><a href="/game">Game</a></li>
+			<li><a href="/games/words-matching">Game sắp xếp từ</a></li>
 			<li><a href="/books/64539f33f840f3e97192810f/sentences">Books sentences</a></li>
 			{#await checkToken()}
 				<p>Loading ... Plz wait sir!</p>
