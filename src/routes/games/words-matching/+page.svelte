@@ -82,7 +82,10 @@
 		});
 
 		const response = await res.json();
-		if (response.status !== 200) {
+		if (response.status === 403) {
+			window.location.href = '/user/login';
+		}
+		if (response.status === 400) {
 			err = 'Đáp án của bạn không đúng!';
 			return;
 		}
