@@ -43,10 +43,15 @@
 	</div>
 	<nav>
 		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="/books">Books</a></li>
+			<li><a href="/">Trang chủ</a></li>
+			<li>/</li>
+			<li><a href="/books">Sách</a></li>
+			<li>/</li>
 			<li><a href="/games/words-matching">Game sắp xếp từ</a></li>
-			<li><a href="/books/64539f33f840f3e97192810f/sentences">Books sentences</a></li>
+			<li>/</li>
+			<li><a href="/games/answer">Game trắc nghiệm</a></li>
+			<li>/</li>
+			<!-- <li><a href="/books/64539f33f840f3e97192810f/sentences">Books sentences</a></li> -->
 			{#await checkToken()}
 				<p>Loading ... Plz wait sir!</p>
 			{:then token}
@@ -59,6 +64,7 @@
 					<li>
 						<a href="/user/register">Register</a>
 					</li>
+					<li>/</li>
 					<li>
 						<a href="/user/login">Login</a>
 					</li>
@@ -90,7 +96,7 @@
 	}
 
 	nav ul li {
-		margin-left: 20px;
+		margin-left: 15px;
 	}
 
 	nav ul li:first-child {

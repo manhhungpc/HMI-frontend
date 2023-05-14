@@ -13,7 +13,7 @@
 </script>
 
 <div class="book-slide">
-	<Carousel autoplay autoplayDuration={-2}>
+	<Carousel autoplay autoplayDuration={4000}>
 		{#each books as book}
 			<div class="book-cell">
 				<div class="book-img">
@@ -33,7 +33,7 @@
 						<span class="book-voters">{book.likes} lượt thích</span>
 					</div>
 					<div class="book-sum">
-						{book.intro ? book.intro : 'Không có intro đâu, bruh ._.'}
+						{book.intro ? book.intro : 'Không có tóm tắt!'}
 					</div>
 					<button class="book-see" on:click={() => (window.location.href = `/books/${book._id}`)}>
 						See The Book
