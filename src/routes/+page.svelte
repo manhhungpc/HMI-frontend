@@ -30,7 +30,7 @@
 </svelte:head>
 
 {#await getAllBooks()}
-	<h1>Loading ...</h1>
+	<h1 class="text-4xl flex items-center justify-center h-40">Loading ...</h1>
 {:then books}
 	<div class="book-store">
 		<TitlePage />

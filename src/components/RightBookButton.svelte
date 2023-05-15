@@ -55,8 +55,9 @@
 </script>
 
 <div class="list-button">
-	<div class="title">Tăng, giảm speed, âm lượng</div>
-	<p>Speed: {speed}, volume: {volume}</p>
+	<div class="title">Tăng, giảm tốc độ đọc, âm lượng</div>
+	<p>Speed: {speed}</p>
+	<p>volume: {volume}</p>
 	<button class="button" name="audio-speed-up" on:click={() => changeSpeed(AudioSpeed.up)}>
 		<i class="fa-solid fa-clock fa-2x" /> &nbsp;
 		<i class="fa-solid fa-angles-up fa-2x" />

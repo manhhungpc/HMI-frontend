@@ -31,7 +31,7 @@
 			return false;
 		}
 
-		return response.data;
+		return true;
 	}
 </script>
 

@@ -17,30 +17,30 @@
 <div class="login-wrap">
 	{#if signUp === true}
 		<div class="login-html">
-			<input id="tab-1" type="radio" name="tab" class="sign-in" disabled /><label
-				for="tab-1"
-				class="tab">Login</label
-			>
-			<input id="tab-2" type="radio" name="tab" class="sign-up" checked disabled /><label
-				for="tab-2"
-				class="tab">Register</label
-			>
+			<input id="tab-1" type="radio" name="tab" class="sign-in" disabled />
+			<label for="tab-1" class="tab">
+				<a href="/user/login"> Đăng nhập </a>
+			</label>
+			<input id="tab-2" type="radio" name="tab" class="sign-up" checked disabled />
+			<label for="tab-2" class="tab">
+				<a href="/user/register"> Đăng ký </a>
+			</label>
 			<div class="login-form">
 				<div class="sign-up-htm">
 					<div class="group">
-						<label for="pass" class="label">Name</label>
+						<label for="pass" class="label">Tên</label>
 						<input id="pass" type="text" class="input" bind:value={username} />
 					</div>
 					<div class="group">
-						<label for="pass" class="label">Email Address</label>
+						<label for="pass" class="label">Email</label>
 						<input id="pass" type="email" class="input" bind:value={email} />
 					</div>
 					<div class="group">
-						<label for="pass" class="label">Password</label>
+						<label for="pass" class="label">Mật khẩu</label>
 						<input type="password" class="input" data-type="password" bind:value={password} />
 					</div>
 					<div class="group">
-						<label for="pass" class="label">Repeat Password</label>
+						<label for="pass" class="label">Nhập lại mật khẩu</label>
 						<input type="password" class="input" data-type="password" bind:value={repeatPassword} />
 					</div>
 					<div class="group">
@@ -53,29 +53,25 @@
 									return;
 								}
 								action();
-							}}>Register</button
+							}}>Đăng ký tài khoản</button
 						>
 					</div>
-					<div class="hr" />
-					<a class="foot-link" href="/user/login">
-						<p class="checktrue">Already register?<br /> Login here</p>
-					</a>
 					<a class="normal-link" href="/">
-						<p>Go to homepage <i class="fa-solid fa-arrow-right-to-bracket" /></p>
+						<p>Quay về trang chủ <i class="fa-solid fa-arrow-right-to-bracket" /></p>
 					</a>
 				</div>
 			</div>
 		</div>
 	{:else}
 		<div class="login-html">
-			<input id="tab-1" type="radio" name="tab" class="sign-in" checked disabled /><label
-				for="tab-1"
-				class="tab">Login</label
-			>
-			<input id="tab-2" type="radio" name="tab" class="sign-up" disabled /><label
-				for="tab-2"
-				class="tab">Register</label
-			>
+			<input id="tab-1" type="radio" name="tab" class="sign-in" checked disabled />
+			<label for="tab-1" class="tab">
+				<a href="/user/login"> Đăng nhập </a>
+			</label>
+			<input id="tab-2" type="radio" name="tab" class="sign-up" disabled />
+			<label for="tab-2" class="tab">
+				<a href="/user/register"> Đăng ký </a>
+			</label>
 			<div class="login-form">
 				<div class="sign-in-htm">
 					<div class="group">
@@ -83,22 +79,18 @@
 						<input id="user" type="text" class="input" bind:value={email} />
 					</div>
 					<div class="group">
-						<label for="pass" class="label">Password</label>
+						<label for="pass" class="label">Mật khẩu</label>
 						<input id="pass" type="password" class="input" bind:value={password} />
 					</div>
 					<div class="group">
 						<input id="check" type="checkbox" class="check" checked />
-						<label for="check"><span class="icon" /> Keep me Signed in</label>
+						<label for="check"><span class="icon" /> Giữ phiên đăng nhập</label>
 					</div>
 					<div class="group">
-						<button type="button" class="button-submit" on:click={action}>Login</button>
+						<button type="button" class="button-submit" on:click={action}>Đăng nhập</button>
 					</div>
-					<div class="hr" />
-					<a class="foot-link" href="/user/register">
-						<p class="checktrue">Create new account</p>
-					</a>
 					<a class="normal-link" href="/">
-						<p>Go to homepage <i class="fa-solid fa-arrow-right-to-bracket" /></p>
+						<p>Quay về trang chủ <i class="fa-solid fa-arrow-right-to-bracket" /></p>
 					</a>
 				</div>
 			</div>

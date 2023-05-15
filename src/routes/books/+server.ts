@@ -3,14 +3,20 @@ import axios from 'axios';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 
-export const GET: RequestHandler = async ({ request }) => {
+export const GET: RequestHandler = async ({ request, url }) => {
 	const token = request.headers.get('Authorization');
+	const queryBook = url.searchParams.get("book") || ""
 	let response: any;
 	try {
 		response = await axios.get(`${API_ENDPOINT}/v1/books`, {
 			headers: {
 				Authorization: token,
 			},
+			params: {
+				book: queryBook,
+				sort: "views",
+				
+			}
 		});
 	} catch (err: any) {
 		response = err.response;

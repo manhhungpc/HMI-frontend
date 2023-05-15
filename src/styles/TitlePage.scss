@@ -23,6 +23,27 @@
 		white-space: nowrap;
 	}
 }
+.list-dropdown{
+	z-index: 99;
+	position: absolute;
+	// right: 50%;
+	top: 110%;
+	background-color: #ff999d;
+	color: #242424;
+	border-radius: 0 0 20px 20px;
+	width: 85%;
+	padding: 0 10px;
+}
+.list-dropdown li {
+	padding: 10px 5px;
+	border-top: 1px solid #9f9f9f;
+}
+
+.list-dropdown li:hover{
+	border-radius: 20px;
+	background-color: #fd797d;
+
+}
 .search-bar {
 	position: relative;
 	width: 400px;

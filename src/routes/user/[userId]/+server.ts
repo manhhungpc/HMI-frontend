@@ -14,6 +14,7 @@ export const GET: RequestHandler = async ({ request, params }) => {
 		});
 	} catch (err: any) {
 		response = err.response;
+		return json(response)
 	}
 
 	return json(response.data);

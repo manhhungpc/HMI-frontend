@@ -11,14 +11,9 @@
 
 <div class="popular-books">
 	<div class="main-menu">
-		<div class="popular">Popular by Genre</div>
+		<div class="popular">Các đầu sách / truyện</div>
 		<div class="book-types">
-			<a href="#" class="book-type active"> Tất cả</a>
-			<a href="#" class="book-type"> Truyện cổ tích</a>
-			<a href="#" class="book-type"> Science</a>
-			<a href="#" class="book-type"> Fiction</a>
-			<a href="#" class="book-type"> Philosophy</a>
-			<a href="#" class="book-type"> Biography</a>
+			<button class="book-type active"> Tất cả</button>
 		</div>
 	</div>
 	<div class="book-cards">

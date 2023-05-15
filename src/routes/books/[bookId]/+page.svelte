@@ -54,7 +54,7 @@
 <div id="wrapper">
 	<div class="main-wrapper">
 		{#await getBookData()}
-			<h1>Loading ...</h1>
+			<h1 class="text-4xl flex items-center justify-center h-40">Loading ...</h1>
 		{:then book}
 			<LeftBookButton streamAudio={() => streamAudio(selectedText)} {srcAudio} {selectedText} />
 			<div id="container">

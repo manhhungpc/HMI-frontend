@@ -1,5 +1,6 @@
 <script lang="ts">
 	import 'src/styles/gameMultichoice.css';
+	import { toasts, ToastContainer, FlatToast } from 'svelte-toasts';
 
 	enum PlayState {
 		start = 2,
@@ -80,8 +81,29 @@
 		//@ts-ignore
 		document.getElementById('button-check').disabled = true;
 
-		if (answer !== correctAnswer) correct = false;
-		else score++;
+		if (answer !== correctAnswer) {
+			correct = false;
+			toasts.add({
+				title: 'Kết quả chưa đúng 😥',
+				description: 'Cố gắng hơn ở lần sau nhé!',
+				duration: 3000, // 0 or negative to avoid auto-remove
+				showProgress: true,
+				placement: 'top-right',
+				type: 'error',
+				theme: 'dark',
+			});
+		} else {
+			score++;
+			toasts.add({
+				title: 'Đáp án đúng 😍',
+				description: 'Xin chúc mừng!',
+				duration: 3000, // 0 or negative to avoid auto-remove
+				showProgress: true,
+				placement: 'top-right',
+				type: 'success',
+				theme: 'dark',
+			});
+		}
 
 		for (let i = 0; i < 4; i++) {
 			//@ts-ignore
@@ -152,5 +174,8 @@
 				{/if}
 			</div>
 		</div>
+		<ToastContainer placement="top-right" let:data>
+			<FlatToast {data} />
+		</ToastContainer>
 	{/await}
 </div>

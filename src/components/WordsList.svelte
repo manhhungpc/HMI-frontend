@@ -79,7 +79,7 @@
 			<!-- <p class="time">December, 12</p> -->
 		</div>
 		{#await getUserNote()}
-			<p>Loading ...</p>
+			<h1 class="text-4xl flex items-center justify-center h-40">Loading ...</h1>
 		{:then notes}
 			<div class="projects-section-line">
 				<div class="projects-status">

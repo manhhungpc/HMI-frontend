@@ -30,12 +30,15 @@
 								<i class="fa-solid fa-star" />
 							{/each}
 						</span>
-						<span class="book-voters">{book.likes} lượt thích</span>
+						<span class="book-voters">{book.views} lượt xem</span>
 					</div>
 					<div class="book-sum">
 						{book.intro ? book.intro : 'Không có tóm tắt!'}
 					</div>
-					<button class="book-see" on:click={() => (window.location.href = `/books/${book._id}`)}>
+					<button
+						class="book-see"
+						on:click={() => (window.location.href = `/books/${book._id}/sentences`)}
+					>
 						See The Book
 					</button>
 				</div>

@@ -2,6 +2,7 @@
 	import 'src/styles/adminForm.css';
 	import { convertToBase64 } from 'src/utils/base64';
 	import { getToken } from 'src/utils/token';
+	import { toasts, ToastContainer, FlatToast } from 'svelte-toasts';
 	//@ts-ignore
 	import MultiSelect from 'svelte-multiselect';
 
@@ -103,9 +104,28 @@
 		});
 		const response = await res.json();
 		console.log(response);
-		// if (response.status === 200) {
-		// 	window.location.href = '/books';
-		// }
+		if (response.status !== 200) {
+			toasts.add({
+				title: 'Thất bại! Thử tải lại',
+				description: '',
+				duration: 4000, // 0 or negative to avoid auto-remove
+				showProgress: true,
+				placement: 'top-right',
+				type: 'error',
+				theme: 'dark',
+			});
+			return;
+		}
+
+		toasts.add({
+			title: 'Thành công',
+			description: '',
+			duration: 4000, // 0 or negative to avoid auto-remove
+			showProgress: true,
+			placement: 'top-right',
+			type: 'success',
+			theme: 'dark',
+		});
 	};
 	const onUpdateBook = async (id: string) => {
 		const updateData = {
@@ -125,8 +145,31 @@
 		});
 		const response = await res.json();
 		console.log(response);
+		if (response.status !== 200) {
+			toasts.add({
+				title: 'Thất bại! Thử tải lại',
+				description: '',
+				duration: 4000, // 0 or negative to avoid auto-remove
+				showProgress: true,
+				placement: 'top-right',
+				type: 'error',
+				theme: 'dark',
+			});
+			return;
+		}
+
+		toasts.add({
+			title: 'Thành công',
+			description: '',
+			duration: 4000, // 0 or negative to avoid auto-remove
+			showProgress: true,
+			placement: 'top-right',
+			type: 'success',
+			theme: 'dark',
+		});
 		return response;
 	};
+
 	const onDeleteBook = async (id: string) => {
 		const res = await fetch(`/admin/books/${id}`, {
 			method: 'DELETE',
@@ -137,6 +180,28 @@
 		});
 		const response = await res.json();
 		console.log(response);
+		if (response.status !== 200) {
+			toasts.add({
+				title: 'Thất bại! Thử tải lại',
+				description: '',
+				duration: 4000, // 0 or negative to avoid auto-remove
+				showProgress: true,
+				placement: 'top-right',
+				type: 'error',
+				theme: 'dark',
+			});
+			return;
+		}
+
+		toasts.add({
+			title: 'Thành công',
+			description: '',
+			duration: 4000, // 0 or negative to avoid auto-remove
+			showProgress: true,
+			placement: 'top-right',
+			type: 'success',
+			theme: 'dark',
+		});
 		return response;
 	};
 </script>
@@ -166,11 +231,14 @@
 		{#if err}
 			<h2>Lỗi: {err}</h2>
 		{/if}
+		<ToastContainer placement="top-right" let:data>
+			<FlatToast {data} />
+		</ToastContainer>
 		<form class="wrap-form">
 			<div class="twothirds">
 				{#if mode === Mode.edit || mode === Mode.delete}
 					{#await getAllBooks()}
-						<p>Loading books ...</p>
+						<h1 class="text-4xl flex items-center justify-center h-40">Đang lấy data sách ...</h1>
 					{:then books}
 						<div>
 							Chọn sách để {mode === Mode.edit ? 'cập nhật' : 'xóa'}

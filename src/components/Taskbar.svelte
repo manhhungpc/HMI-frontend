@@ -29,9 +29,9 @@
 
 <div class="books-of">
 	<div class="week">
-		<div class="author-title">Author of the week</div>
+		<div class="author-title">Tác giả nổi bật</div>
 		{#await getAllAuthors()}
-			<h1>Loading ...</h1>
+			<h1 class="text-4xl flex items-center justify-center h-40">Loading ...</h1>
 		{:then authors}
 			{#each authors as author}
 				<div class="author">
@@ -46,13 +46,13 @@
 		{/await}
 	</div>
 	<div class="week">
-		<div class="author-title">Books of the year</div>
+		<div class="author-title">Các cuốn sách</div>
 		{#each books as book}
 			<div class="year-book">
 				<img src={book.images[0] ? book.images[0] : blank_book} alt="" class="year-book-img" />
 				<div class="year-book-content">
-					<div>{book.title}</div>
-					<div>by {book.authors[0] ? book.authors[0].name : 'Chưa có tác giả!'}</div>
+					<div class="font-bold">{book.title}</div>
+					<div>bởi {book.authors[0] ? book.authors[0].name : 'Chưa có tác giả!'}</div>
 				</div>
 			</div>
 		{/each}
