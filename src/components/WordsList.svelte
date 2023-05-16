@@ -75,7 +75,7 @@
 	</div>
 	<div class="projects-section">
 		<div class="projects-section-header">
-			<p>List words note</p>
+			<p>Danh sách các từ đã lưu</p>
 			<!-- <p class="time">December, 12</p> -->
 		</div>
 		{#await getUserNote()}

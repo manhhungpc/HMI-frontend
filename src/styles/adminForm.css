@@ -122,7 +122,7 @@ li {
 @media screen and (min-width: 600px) {
 	.navigation {
 		position: absolute;
-		width: 200px;
+		width: 250px;
 		height: 137%;
 		background: #2a3542;
 		color: #ddd;
@@ -138,7 +138,7 @@ li {
 	}
 
 	.panel {
-		margin: 2% 0 0 2%;
+		margin: 2% 0 0 5%;
 		float: left;
 		width: 96%;
 	}
@@ -163,6 +163,6 @@ li {
 		clear: none;
 	}
 	.panel.important {
-		width: 96%;
+		width: 90%;
 	}
 }

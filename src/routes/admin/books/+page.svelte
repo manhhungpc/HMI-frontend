@@ -210,24 +210,30 @@
 	<ul class="main">
 		<li class="update">
 			<button class="btn-nav" on:click={() => (mode = Mode.add)}>
-				<i class="fa-solid fa-file-circle-plus" /> Add Book
+				<i class="fa-solid fa-file-circle-plus" /> Thêm sách
 			</button>
 		</li>
 		<li class="update">
 			<button class="btn-nav" on:click={() => (mode = Mode.edit)}>
-				<i class="fa-solid fa-pen-to-square" /> Update Book
+				<i class="fa-solid fa-pen-to-square" /> Cập nhật thông tin sách
 			</button>
 		</li>
 		<li class="delete">
 			<button class="btn-nav" on:click={() => (mode = Mode.delete)}>
-				<i class="fa-solid fa-trash-can" /> Delete Book
+				<i class="fa-solid fa-trash-can" /> Xóa sách
 			</button>
 		</li>
 	</ul>
 </nav>
 <main>
 	<section class="panel important">
-		<h2>Write a story</h2>
+		<h2>
+			{mode === Mode.add
+				? 'Thêm sách'
+				: mode === Mode.edit
+				? 'Cập nhật thông tin sách'
+				: 'Xóa sách'}
+		</h2>
 		{#if err}
 			<h2>Lỗi: {err}</h2>
 		{/if}

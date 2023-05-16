@@ -33,6 +33,11 @@
 
 		return true;
 	}
+
+	function logout() {
+		localStorage.removeItem('token');
+		window.location.href = '/';
+	}
 </script>
 
 <header>
@@ -60,13 +65,18 @@
 						<button class="btn" on:click={redirectLink}> Xin chào, {user.username}</button>
 					</li>
 					<Avatar name={user.username} size="35px" style="margin-left: 10px;" />
+					<li>
+						<button class="btn btn-logout" on:click={logout}>
+							<i class="fa-solid fa-right-from-bracket" />
+						</button>
+					</li>
 				{:else}
 					<li>
-						<a href="/user/register">Register</a>
+						<a href="/user/login">Đăng nhập</a>
 					</li>
 					<li>/</li>
 					<li>
-						<a href="/user/login">Login</a>
+						<a href="/user/register">Đăng ký</a>
 					</li>
 				{/if}
 			{/await}
@@ -116,5 +126,11 @@
 	nav ul li a:hover,
 	.btn:hover {
 		text-decoration: underline;
+	}
+
+	.btn-logout:hover {
+		background-color: #c8c8c8;
+		border-radius: 500px;
+		padding: 5px 8px;
 	}
 </style>

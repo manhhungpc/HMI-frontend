@@ -12,6 +12,7 @@
 		question: any;
 		choices: string[];
 		sentence: string;
+		missWord?: string;
 	}
 	let token = localStorage.getItem('token') as string;
 	let correctAnswer: string = '',
@@ -38,6 +39,7 @@
 			question: formatQuestion(response.data.tokenize, response.data.missIndex),
 			choices: response.data.choices,
 			sentence: response.data.sentence,
+			missWord: response.data.missWord,
 		};
 		return data;
 	}
@@ -81,6 +83,10 @@
 		//@ts-ignore
 		document.getElementById('button-check').disabled = true;
 
+		data.question = data.question.replace(
+			'_____',
+			`<span style="color: #ff8600">${data.missWord}</span>`
+		);
 		if (answer !== correctAnswer) {
 			correct = false;
 			toasts.add({
@@ -159,7 +165,7 @@
 		<div id="container-game-answer">
 			<div id="box-game-answer">
 				{#if playState === PlayState.start}
-					<span class="question">{data.question}</span>
+					<span class="question">{@html data.question}</span>
 				{/if}
 			</div>
 		</div>
