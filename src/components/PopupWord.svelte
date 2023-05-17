@@ -50,7 +50,7 @@
 			(data: any) => !data.url.includes('https://media.istockphoto.com')
 		);
 		if (response.status !== 200) window.location.href = '/user/login';
-		return response.data.slice(0, 3);
+		return response.data.slice(2, 5);
 	}
 
 	async function saveNotes(word: string) {
