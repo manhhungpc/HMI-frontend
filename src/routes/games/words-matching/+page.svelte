@@ -1,5 +1,6 @@
 <script lang="ts">
 	import 'src/styles/gameMatching.css';
+	import { toasts, ToastContainer, FlatToast } from 'svelte-toasts';
 
 	enum PlayState {
 		start = 2,
@@ -90,7 +91,28 @@
 			return;
 		}
 		console.log(response);
-		score++;
+		if (correct === false) {
+			toasts.add({
+				title: 'Kết quả chưa đúng 😥',
+				description: 'Cố gắng hơn ở lần sau nhé!',
+				duration: 3000, // 0 or negative to avoid auto-remove
+				showProgress: true,
+				placement: 'top-right',
+				type: 'error',
+				theme: 'dark',
+			});
+		} else {
+			score++;
+			toasts.add({
+				title: 'Đáp án đúng 😍',
+				description: 'Xin chúc mừng!',
+				duration: 3000, // 0 or negative to avoid auto-remove
+				showProgress: true,
+				placement: 'top-right',
+				type: 'success',
+				theme: 'dark',
+			});
+		}
 		answerArr = [];
 		await getRandomQuestion();
 		return;
@@ -101,6 +123,9 @@
 	{#await getRandomQuestion()}
 		<p>Đang lấy câu hỏi ...</p>
 	{:then question}
+		<ToastContainer placement="top-right" let:data>
+			<FlatToast {data} />
+		</ToastContainer>
 		<h1 class="title-game">Hãy sắp xếp câu sau thành câu đúng và có nghĩa</h1>
 		<button class="button-start" on:click={startPlaying}>Bắt đầu</button>
 		<button class="button-scores" on:click={() => (playState = PlayState.over)}>Kết thúc</button>

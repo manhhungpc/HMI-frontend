@@ -7,10 +7,6 @@
 	const user: any = token ? decode(token) : 'No user!';
 
 	function redirectLink() {
-		if (user.role === 'admin') {
-			window.location.href = '/admin/books';
-			return;
-		}
 		window.location.href = `/user/${user._id}/words-note`;
 	}
 
@@ -64,6 +60,13 @@
 					<li>
 						<button class="btn" on:click={redirectLink}> Xin chào, {user.username}</button>
 					</li>
+					{#if user.role === 'admin'}
+						<li>
+							<button class="btn" on:click={() => (window.location.href = '/admin/books')}>
+								<i class="fa-solid fa-user-pen" />
+							</button>
+						</li>
+					{/if}
 					<Avatar name={user.username} size="35px" style="margin-left: 10px;" />
 					<li>
 						<button class="btn btn-logout" on:click={logout}>
